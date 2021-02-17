@@ -56,6 +56,23 @@ evaluation of a long-running form can be interrupted.
 | `unravel` command in a terminal | Ctrl-C typed in terminal where `unravel` started | Uses `stop` method. Search for 'stop' in this [source file](https://github.com/Unrepl/unrepl/blob/fa946eef88b0516dab81c8a9b3d8f9fcff06f44b/src/unrepl/repl.clj) |
 | bb (babashka) | none, because GraalVM does not support deprecated `stop` method (source: babashka developer Michiel Borkent) | none |
 
+A very quick way to test whether a particular REPL supports Ctrl-C to
+stop evaluation of the current form is to do this inside of the REPL:
+
+```clojure
+user=> (def tmp1 (dorun (range)))
+```
+
+That will start an infinite loop.  Type Ctrl-C, or whatever keystroke
+the particular REPL might document as stopping the currently
+evaluating form.
+
+If you get a new REPL prompt back, the JVM should still be running,
+but that one thread that was evaluating that form was stopped.
+
+If you get back to a prompt for your terminal or command shell, then
+most likely the JVM process itself was killed, along with any state or
+data that was in that process's memory.
 
 Commands to show versions of various software you might have
 installed:
@@ -74,7 +91,9 @@ Version combinations tested for `lein repl` in a terminal:
 | OS | JDK | Leiningen | other versions |
 | -- | --- | --------- | -------------- |
 | Ubuntu 18.04.5 | OpenJDK 11.0.10 | 2.9.3 | REPL-y 0.4.4, nREPL 0.6.0 |
+| Ubuntu 18.04.5 | OpenJDK 11.0.10 | 2.9.5 | REPL-y 0.4.4, nREPL 0.8.3 |
 | macOS 10.14.6 | AdoptOpenJDK 15.0.1 | 2.9.3 | REPL-y 0.4.4, nREPL 0.6.0 |
+| macOS 10.14.6 | AdoptOpenJDK 1.8.0_275 | 2.9.5 | REPL-y 0.4.4, nREPL 0.8.3 |
 | Window 10 cmd.exe window | AdtopOpenJDK 11.0.9 | 2.9.5 | REPL-y 0.4.4, nREPL 0.8.3 |
 
 Version combinations tested for `clojure` and `clj` in a terminal,
