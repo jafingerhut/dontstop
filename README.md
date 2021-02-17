@@ -50,7 +50,7 @@ evaluation of a long-running form can be interrupted.
 | ------------------- | --------------------------------- | ------------------------- |
 | `lein repl` command in a terminal | Ctrl-C typed in the terminal | Uses `stop` method.  Search for 'stop' in this [nrepl source file](https://github.com/nrepl/nrepl/blob/565cc075dc8ba1179e0a9d6b4ef8eb6ae9d47f54/src/clojure/nrepl/middleware/session.clj) |
 | `clojure` or `clj` CLI command in a terminal (empty deps.edn file) | none.  Ctrl-C in terminal where command was started kills the entire JVM process | none |
-| `unravel` command in a terminal | Ctrl-C typed in terminal where `unravel` started | Uses `stop` method. |
+| `unravel` command in a terminal | Ctrl-C typed in terminal where `unravel` started | Uses `stop` method. Search for 'stop' in this [source file](https://github.com/Unrepl/unrepl/blob/fa946eef88b0516dab81c8a9b3d8f9fcff06f44b/src/unrepl/repl.clj) |
 | bb (babashka) | none, because GraalVM does not support deprecated `stop` method (source: babashka developer Michiel Borkent) | none |
 
 
@@ -253,37 +253,6 @@ In case someone might wonder whether the sometimes-safety of calling
 answer is no.  There are much more important reasons, such as
 significantly simpler reasoning about the correctness of your
 programs.
-
-
-## Notes from Sean Corfield on his workflow as of early 2021
-
-Chlorine and Clover both support interruption of the current REPL
-evaluation via unrepl/unravel.
-
-I almost never have to use that feature.  unrepl/unravel do not force
-infinite sequences so that is another cause of evaluation hanging that
-I do not have to worry about.
-
-unrepl does not solve all the problems.  Mauricio Szabo (developer of
-Chlorine and Clover) has complained that the amount that unrepl favors
-tagged literals gets in the way with some operations and he's
-repeatedly been frustrated trying to work with and has considered
-developing his own, simpler solution.  But he hasn't quite been pushed
-that far.
-
-The nREPL developers have often mentioned adding a feature to nREPL
-enabling it to be "side loaded", which would allow for nREPL to be
-loaded from the client into a process running only a Socket REPL (or
-prepl).
-
-I can see how nREPL could make the life of developers of
-editor/tooling projects a lot easier.
-
-https://github.com/Unrepl/unrepl
-
-The latest version of that code as of 2021-Feb-15 shows exactly one
-call to the `java.lang.Thread/stop` method inside of a function called
-`interrupt!`.
 
 
 ## License
