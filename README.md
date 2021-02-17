@@ -80,10 +80,9 @@ installed:
 + Ubuntu Linux: `lsb_release -a`
 + JDK: `java -version`
 + [Leiningen](https://leiningen.org/): `lein version`
-+ Clojure CLI tools (note: the version of the Clojure CLI tools
-  software is separate from the Clojure language version you are
-  using): `clj -Sdescribe`
-  + [Install instructions](https://clojure.org/guides/getting_started)
++ [Clojure CLI tools](https://clojure.org/guides/getting_started)
+  (note: the version of the Clojure CLI tools software is separate
+  from the Clojure language version you are using): `clj -Sdescribe`
 + [Unravel](https://github.com/Unrepl/unravel) REPL: `unravel --version`
 
 Version combinations tested for `lein repl` in a terminal:
