@@ -71,8 +71,15 @@ If you get a new REPL prompt back, the JVM should still be running,
 but that one thread that was evaluating that form was stopped.
 
 If you get back to a prompt for your terminal or command shell, then
-most likely the JVM process itself was killed, along with any state or
-data that was in that process's memory.
+either:
+
++ the JVM process itself was killed, along with any state or data that
+  was in that process's memory.
++ or, if you are using a REPL that is a separate process that connects
+  to the JVM process running your Clojure code over some kind of
+  connection, e.g. a TCP socket, it might be that only the separate
+  process was killed, but the JVM process running your Cloure code is
+  still running, and perhaps even still running the infinite loop.
 
 Commands to show versions of various software you might have
 installed:
