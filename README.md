@@ -75,6 +75,7 @@ Version combinations tested for `lein repl` in a terminal:
 | -- | --- | --------- | -------------- |
 | Ubuntu 18.04.5 | OpenJDK 11.0.10 | 2.9.3 | REPL-y 0.4.4, nREPL 0.6.0 |
 | macOS 10.14.6 | AdoptOpenJDK 15.0.1 | 2.9.3 | REPL-y 0.4.4, nREPL 0.6.0 |
+| Window 10 cmd.exe window | AdtopOpenJDK 11.0.9 | 2.9.5 | REPL-y 0.4.4, nREPL 0.8.3 |
 
 Version combinations tested for `clojure` and `clj` in a terminal,
 with empty `deps.edn` file:
@@ -114,9 +115,9 @@ deprecated in way that is easy to understand.
 So what is the big deal with the `stop` method?
 
 Below is a series of commands to start a Leiningen REPL in a terminal.
-Using Leiningen version 2.9.3 (latest as of 2021-Feb-16), and I
-believe many earlier versions, you can type Ctrl-C in such a REPL
-session, and it will cause the `stop` method to be called on the
+Using Leiningen version 2.9.3 (a recent version as of 2021-Feb-16),
+and I believe many earlier versions, you can type Ctrl-C in such a
+REPL session, and it will cause the `stop` method to be called on the
 thread that is evaluating the current form, and a new REPL prompt to
 be printed.
 
