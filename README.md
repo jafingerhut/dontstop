@@ -21,7 +21,7 @@ Glossary:
 + JVM - Java Virtual Machine
 + REPL - Read, Eval, Print, Loop
 
-This repository's name is a reference to the Fleetwood Mac
+This repository's name is a reference to the [Fleetwood Mac
 song](https://en.wikipedia.org/wiki/Don%27t_Stop_(Fleetwood_Mac_song)).
 
 
