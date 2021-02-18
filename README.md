@@ -55,8 +55,8 @@ evaluation of a long-running form can be interrupted.
 | How REPL is started | Method of interrupting evaluation | Underlying implementation |
 | ------------------- | --------------------------------- | ------------------------- |
 | `lein repl` command in a terminal | Ctrl-C typed in the terminal | See "nrepl version" table below |
-| `clojure` or `clj` CLI command in a terminal (empty deps.edn file) | none.  Ctrl-C in terminal where command was started kills the entire JVM process | none |
-| `clojure` ”jack-in” from an editor using `cider-nrepl` [See Note 1] | The editor command for interrupting running evaluations, e.g. Ctrl-Alt-C Ctrl-Alt-D with Calva default key bindings executes the operation "Calva: Interrupt running Evaluations" | See "nrepl version" table below |
+| `clojure` or `clj` CLI command in a terminal (empty deps.edn file) | none.  Ctrl-C in terminal where command was started kills the entire JVM process | operating system, e.g. sending SIGINT signal to JVM process for Linux or macOS |
+| `clojure` ”jack-in” from an editor using `cider-nrepl` [See Note 1] | The editor command for interrupting running evaluations, e.g. Ctrl-Alt-C Ctrl-Alt-D with Calva default key bindings executes the operation "Calva: Interrupt running Evaluations" | See "nrepl version" table below, for nrepl version that should appear in some editor window at the time you did the jack-in |
 | `unravel` command in a terminal | Ctrl-C typed in terminal where `unravel` started | Uses `stop` method. Search for 'stop' in this [source file](https://github.com/Unrepl/unrepl/blob/fa946eef88b0516dab81c8a9b3d8f9fcff06f44b/src/unrepl/repl.clj) |
 | bb (babashka) | none, because GraalVM does not support deprecated `stop` method (source: babashka developer Michiel Borkent) | none |
 
@@ -84,7 +84,11 @@ the particular REPL might document as stopping the currently
 evaluating form.
 
 If you get a new REPL prompt back, the JVM should still be running,
-but that one thread that was evaluating that form was stopped.
+but that one thread that was evaluating that form was stopped (or in
+the case of latest nrepl versions, that thread might not be stopped
+until 5 seconds after the new prompt appears -- you can use a command
+like `top`, Activity Monitor on macOS, or Task Manager on Windows to
+see when/if the CPU usage actually decreases).
 
 If you get back to a prompt for your terminal or command shell, then
 either:
