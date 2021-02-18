@@ -66,7 +66,7 @@ Editors which support this include Emacs with [CIDER](https://docs.cider.mx/), a
 | nrepl version | Underlying mechanism |
 | ------------- | -------------------- |
 | 0.6.0         | Uses `interrupt` method followed immediately by `stop` method.  Search for `stop` in source file src/clojure/nrepl/middleware/session.clj in tag 0.6.0 of https://github.com/nrepl/nrepl |
-| 0.7.0 and later | Uses `interrupt` method followed about 5.1 sec later by `stop` method, if `interrupt` method did not cause the thread to stop.  Search for `stop` in source file src/clojure/nrepl/middleware/session.clj in tag 0.7.0 of https://github.com/nrepl/nrepl |
+| 0.7.0 and later | Uses `interrupt` method followed about 5.1 sec later by `stop` method, if `interrupt` method did not cause the thread to stop.  Search for `stop` in source file src/clojure/nrepl/middleware/session.clj in tag 0.7.0 of https://github.com/nrepl/nrepl  This was changed from earlier nrepl behavior with this PR: https://github.com/nrepl/nrepl/pull/163 |
 
 A very quick way to test whether a particular REPL started in a
 terminal supports Ctrl-C to stop evaluation of the current form is to
