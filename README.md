@@ -51,7 +51,8 @@ evaluation of a long-running form can be interrupted.
 
 | How REPL is started | Method of interrupting evaluation | Underlying implementation |
 | ------------------- | --------------------------------- | ------------------------- |
-| `lein repl` command in a terminal | Ctrl-C typed in the terminal | Uses `stop` method.  Search for 'stop' in this [nrepl source file](https://github.com/nrepl/nrepl/blob/565cc075dc8ba1179e0a9d6b4ef8eb6ae9d47f54/src/clojure/nrepl/middleware/session.clj) |
+| `lein repl` command in a terminal with nrepl 0.6.0 | Ctrl-C typed in the terminal | Uses `interrupt` method followed immediately by `stop` method.  Search for `stop` in source file src/clojure/nrepl/middleware/session.clj in tag 0.6.0 of https://github.com/nrepl/nrepl |
+| `lein repl` command in a terminal with nrepl 0.7.0 or later | Ctrl-C typed in the terminal | Uses `interrupt` method followed about 5.1 sec later by `stop` method, if `interrupt` method did not cause the thread to stop.  Search for `stop` in source file src/clojure/nrepl/middleware/session.clj in tag 0.7.0 of https://github.com/nrepl/nrepl |
 | `clojure` or `clj` CLI command in a terminal (empty deps.edn file) | none.  Ctrl-C in terminal where command was started kills the entire JVM process | none |
 | `unravel` command in a terminal | Ctrl-C typed in terminal where `unravel` started | Uses `stop` method. Search for 'stop' in this [source file](https://github.com/Unrepl/unrepl/blob/fa946eef88b0516dab81c8a9b3d8f9fcff06f44b/src/unrepl/repl.clj) |
 | bb (babashka) | none, because GraalVM does not support deprecated `stop` method (source: babashka developer Michiel Borkent) | none |
