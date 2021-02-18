@@ -54,8 +54,15 @@ evaluation of a long-running form can be interrupted.
 | `lein repl` command in a terminal with nrepl 0.6.0 | Ctrl-C typed in the terminal | Uses `interrupt` method followed immediately by `stop` method.  Search for `stop` in source file src/clojure/nrepl/middleware/session.clj in tag 0.6.0 of https://github.com/nrepl/nrepl |
 | `lein repl` command in a terminal with nrepl 0.7.0 or later | Ctrl-C typed in the terminal | Uses `interrupt` method followed about 5.1 sec later by `stop` method, if `interrupt` method did not cause the thread to stop.  Search for `stop` in source file src/clojure/nrepl/middleware/session.clj in tag 0.7.0 of https://github.com/nrepl/nrepl |
 | `clojure` or `clj` CLI command in a terminal (empty deps.edn file) | none.  Ctrl-C in terminal where command was started kills the entire JVM process | none |
+| `clojure` ”jack-in” from an editor using `cider-nrepl`(*) | The editor command for interrupting running evaluations | TBC |
 | `unravel` command in a terminal | Ctrl-C typed in terminal where `unravel` started | Uses `stop` method. Search for 'stop' in this [source file](https://github.com/Unrepl/unrepl/blob/fa946eef88b0516dab81c8a9b3d8f9fcff06f44b/src/unrepl/repl.clj) |
 | bb (babashka) | none, because GraalVM does not support deprecated `stop` method (source: babashka developer Michiel Borkent) | none |
+
+(*) Editors that support cider-nrepl ”Jack in” also support connecting to a REPL started with something like this:
+```sh
+clojure -Sdeps '{:deps {nrepl/nrepl {:mvn/version,"0.8.3"},cider/cider-nrepl {:mvn/version,"0.25.8"}}}'  -m nrepl.cmdline --middleware "[cider.nrepl/cider-middleware]"
+```
+Editors which support this include Emacs with [CIDER](https://docs.cider.mx/), and VS Code with [Calva](https://calva.io).
 
 A very quick way to test whether a particular REPL supports Ctrl-C to
 stop evaluation of the current form is to do this inside of the REPL:
