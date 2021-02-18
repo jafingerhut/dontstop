@@ -1,12 +1,11 @@
 # Interrupting long-running evaluations in a Clojure REPL
 
 There are many ways to start a Clojure REPL.  They have many differing
-properties, including whether they enable you to interrupt a
-long-running expression that you have initiated by attempting to
-evaluate an expression in the REPL.
+properties, including whether they enable you to start to evaluate an
+expression, and then interrupt it before it completes.
 
 This repository is intended to collect together at least some of the
-ways of starting a Clojure REPL, and whether they let you interrupt a
+ways of starting a Clojure REPL, whether they let you interrupt a
 long-running expression in the REPL, and if so, how.
 
 It also has a concrete example of the potential dangers of
@@ -27,6 +26,10 @@ song](https://en.wikipedia.org/wiki/Don%27t_Stop_(Fleetwood_Mac_song)).
 
 ## Why are there so many ways to start a Clojure REPL?
 
+For example, [The Ultimate Guide to Clojure
+REPLs](https://lambdaisland.com/guides/clojure-repls) lists many of
+them.
+
 Different developers have varying preferences on such things as:
 
 + what editor / IDE they prefer to use
@@ -35,11 +38,11 @@ Different developers have varying preferences on such things as:
 + what kinds of additional software they run on each "side" of a
   connection between the Clojure runtime process(es) and the IDE
   process(es) that enable features like:
-  + jump to definition
+  + jump to definition of a function or other symbol
   + lookup of function documentation and argument lists
   + pretty-printing of results, perhaps with different colors to
     highlight different parts of the printed values
-  + custom handling or formatting of exception that are thrown
+  + custom handling or formatting of exceptions that are thrown
 
 These variations can lead not only to different enhancement
 capabilities in the IDE of the developer, but also to how they can
